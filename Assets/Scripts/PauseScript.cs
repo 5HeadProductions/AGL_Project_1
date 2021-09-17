@@ -13,6 +13,8 @@ public class PauseScript : MonoBehaviour
 
     [SerializeField] public Button resumeButton, exitButton;
     public string exitScene;
+
+    public AudioSource pauseSound, unpauseSound;
     
     void Start() {
         pauseScreen = GameObject.Find("PauseScreen");
@@ -37,6 +39,7 @@ public class PauseScript : MonoBehaviour
 
     IEnumerator Pause() {
         float timePassed = 0f;
+        pauseSound.Play();
         
         while (timePassed < pauseTransitionDuration) {
             Time.timeScale = Mathf.SmoothStep(1f, 0f, timePassed/pauseTransitionDuration);     // Sick slow motion transition from unpaused to paused.
@@ -50,6 +53,7 @@ public class PauseScript : MonoBehaviour
 
     IEnumerator Unpause() {
         float timePassed = 0f;
+        unpauseSound.Play();
         
         while (timePassed < pauseTransitionDuration) {
             Time.timeScale = Mathf.SmoothStep(0f, 1f, timePassed/pauseTransitionDuration);     // Reversed transition from paused to unpaused.
